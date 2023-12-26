@@ -4,6 +4,8 @@ import './App.css';
 
 function App() {
   const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [totalTime, setTotalTime] = useState(1500);
 
   const incrementBreak = () => {
     breakLength < 60 && setBreakLength(breakLength + 1);
@@ -11,6 +13,20 @@ function App() {
 
   const decrementBreak = () => {
     breakLength > 1 && setBreakLength(breakLength - 1);
+  };
+
+  const incrementSession = () => {
+    if (sessionLength < 60) {
+      setSessionLength(sessionLength + 1);
+      setTotalTime(totalTime + 60);
+    }
+  };
+
+  const decrementSession = () => {
+    if (sessionLength > 1) {
+      setSessionLength(sessionLength - 1);
+      setTotalTime(totalTime - 60);
+    }
   };
 
   return (
@@ -31,10 +47,10 @@ function App() {
           <div id="session-label">
             <h2>Session Length</h2>
             <div className="session-buttons">
-              <button id="session-increment">
+              <button onClick={incrementSession} id="session-increment">
               </button>
               <div id="session-length">sessionLength</div>
-              <button id="session-decrement">
+              <button onClick={decrementSession} id="session-decrement">
               </button>
             </div>
           </div>
