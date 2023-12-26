@@ -1,6 +1,18 @@
+import { useState } from 'react';
+
 import './App.css';
 
 function App() {
+  const [breakLength, setBreakLength] = useState(5);
+
+  const incrementBreak = () => {
+    breakLength < 60 && setBreakLength(breakLength + 1);
+  };
+
+  const decrementBreak = () => {
+    breakLength > 1 && setBreakLength(breakLength - 1);
+  };
+
   return (
     <div className="App">
       <div className="main-container">
@@ -9,10 +21,10 @@ function App() {
           <div id="break-label">
             <h2>Break Length</h2>
             <div className="break-buttons">
-              <button id="break-increment">
+              <button onClick={incrementBreak} id="break-increment">
               </button>
               <div id="break-length">breakLength</div>
-              <button id="break-decrement">
+              <button onClick={decrementBreak} id="break-decrement">
               </button>
             </div>
           </div>
