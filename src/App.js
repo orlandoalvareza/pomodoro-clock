@@ -5,7 +5,9 @@ import './App.css';
 function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
+  const [title, setTitle] = useState('Session');
   const [totalTime, setTotalTime] = useState(1500);
+  const [isPlay, setIsPlay] = useState(false);
 
   const incrementBreak = () => {
     breakLength < 60 && setBreakLength(breakLength + 1);
@@ -28,6 +30,33 @@ function App() {
       setTotalTime(totalTime - 60);
     }
   };
+
+  const Timer = () => {
+    const min = Math.floor(totalTime / 60);
+    const sec = totalTime - min * 60;
+    const secCount = sec <= 9 ? '0' + sec : sec;
+    const minCount = min <= 9 ? '0' + min : min;
+    return `${minCount}:${secCount}`;
+  };
+
+  const playTimer = () => {
+    setIsPlay(!isPlay);
+  };
+
+  function changeTimer() {
+    const audio = document.getElementById('beep');
+
+    if (totalTime === -1 && title === 'Session') {
+      setTotalTime(breakLength * 60);
+      setTitle('break');
+      audio.play();
+    }
+    if (totalTime === -1 && title === 'break') {
+      setTotalTime(sessionLength * 60);
+      setTitle('Session');
+      audio.play();
+    }
+  }
 
   return (
     <div className="App">
