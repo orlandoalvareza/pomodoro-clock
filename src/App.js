@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './App.css';
 
@@ -8,6 +8,20 @@ function App() {
   const [title, setTitle] = useState('Session');
   const [totalTime, setTotalTime] = useState(1500);
   const [isPlay, setIsPlay] = useState(false);
+
+  useEffect(() => {
+    let timeOut = null;
+
+    if (totalTime >= 0 && isPlay) {
+      timeOut = setTimeout(() => {
+        setTotalTime(totalTime - 1);
+      }, 1000);
+    }
+
+    changeTimer();
+
+    return () => clearTimeout(timeOut);
+  }, [isPlay, totalTime]);
 
   const incrementBreak = () => {
     breakLength < 60 && setBreakLength(breakLength + 1);
