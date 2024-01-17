@@ -91,6 +91,14 @@ function App() {
     setTitle('Session');
   };
 
+  const pomodoroAudio = (
+    <audio
+      id="beep"
+      preload="auto"
+      src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+    ></audio>
+  )
+
   return (
     <div className="App">
       <div className="main-container">
@@ -170,11 +178,7 @@ function App() {
           </div>
         </div>
       </div>
-      <audio
-        id="beep"
-        preload="auto"
-        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-      ></audio>
+      {pomodoroAudio}
     </div>
   );
 }
